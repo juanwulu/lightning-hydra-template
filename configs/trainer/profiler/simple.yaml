@@ -1,0 +1,7 @@
+# See https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.profilers.SimpleProfiler.html#lightning.pytorch.profilers.SimpleProfiler
+_target_: lightning.pytorch.profilers.Profiler
+_convert_: "all"
+
+dirpath: ${paths.log_dir}/profiler/simple/${oc.env:PROJECT_GIT_SHORT_SHA}_${now:%Y-%m-%d_%H-%M-%S}
+filename: "profiler_output"
+extended: true
