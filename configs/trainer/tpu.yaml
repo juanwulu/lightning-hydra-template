@@ -1,4 +1,4 @@
 defaults:
   - default
 
-accelerator: mps
+accelerator: tpu

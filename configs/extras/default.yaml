@@ -1,8 +1,8 @@
-# disable python warnings if they annoy you
-ignore_warnings: False
+# disable Python warnings
+ignore_warnings: true
 
-# ask user for tags if none are provided in the config
-enforce_tags: True
+# If true, enforce tags for experiment tracking
+enforce_tags: true
 
-# pretty print config tree at the start of the run using Rich library
-print_config: True
+# pretty print the configuration tree before training
+print_config: true

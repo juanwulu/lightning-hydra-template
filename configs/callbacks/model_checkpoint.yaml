@@ -1,7 +1,8 @@
-# https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.callbacks.ModelCheckpoint.html
+# See https://lightning.ai/docs/pytorch/stable/api/lightning.pytorch.callbacks.ModelCheckpoint.html#lightning.pytorch.callbacks.ModelCheckpoint
 
 model_checkpoint:
   _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  _convert_: "all"
   dirpath: null # directory to save the model file
   filename: null # checkpoint filename
   monitor: null # name of the logged metric which determines when model is improving
