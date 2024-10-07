@@ -24,7 +24,7 @@ dependencies = [
 dev = ["pre-commit", "pytest", "torch_tb_profiler"]
 
 [project.urls]
-"Homepage" = "https://github.com/juanwulu/lightning-hydra-template" 
+"Homepage" = "https://github.com/juanwulu/lightning-hydra-template"
 
 [tool.pytest.ini_options]
 addopts = [
