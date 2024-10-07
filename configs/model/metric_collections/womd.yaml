@@ -1,6 +1,0 @@
-_target_: torchmetrics.MetricCollection
-_convert_: all
-metrics:
-  minADE:
-    _target_: src.model.metrics.MinAverageDisplacementError
-    _convert_: all
