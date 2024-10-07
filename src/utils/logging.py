@@ -65,11 +65,7 @@ def get_logger(name=__name__) -> logging.Logger:
 
     # use `rank_zero_only` to ensure that all logging levels get marked with
     # rank zero decorator, and avoid duplicate logging from each process.
-    logging_levels = [
-        name.lower()
-        for name in logging._nameToLevel.keys()
-        if name != "NOTSET"
-    ]
+    logging_levels = [name.lower() for name in logging._nameToLevel.keys() if name != "NOTSET"]
     for level in logging_levels:
         setattr(logger, level, rank_zero_only(getattr(logger, level)))
 

@@ -7,7 +7,7 @@ defaults:
 # Overrides the default configurations
 model_checkpoint:
   dirpath: ${paths.output_dir}/checkpoints
-  filename: "epoch_{epoch:03d}_${oc.env:PROJECT_GIT_SHORT_SHA}"
+  filename: "epoch_{epoch:03d}_${parse_git_sha:true}"
   monitor: "val/loss"
   mode: "min"
   save_last: true

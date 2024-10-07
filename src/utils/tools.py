@@ -20,7 +20,6 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 """A collection of tool functions for various purposes."""
-import os
 import warnings
 from importlib.util import find_spec
 from typing import Any, Callable, Dict, Optional, Tuple
@@ -99,26 +98,6 @@ def get_metric_value(
     LOGGER.debug(f"Retrieved metric value <{metric_name}={metric_value}>")
 
     return metric_value
-
-
-def parse_git_info(clean: bool = False) -> None:
-    """Parse git information and export to environment variables."""
-    import git
-
-    repo = git.Repo(search_parent_directories=True)
-    sha = repo.head.object.hexsha
-    short_sha = repo.git.rev_parse(sha, short=7)
-    is_clean = not repo.is_dirty()
-
-    if clean and not is_clean:
-        LOGGER.info(
-            "Clean your git repository before running experiments! "
-            f"GIT SHA: {sha}, Status: {'Clean' if is_clean else 'Dirty'}"
-        )
-        os._exit(1)
-
-    os.environ["PROJECT_GIT_SHA"] = sha
-    os.environ["PROJECT_GIT_SHORT_SHA"] = short_sha
 
 
 def task_wrapper(

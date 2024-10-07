@@ -50,8 +50,7 @@ def build_callbacks(cfg: Optional[DictConfig] = None) -> List[Callback]:
 
     if not isinstance(cfg, DictConfig):
         raise TypeError(
-            "Expect `cfg` to be a `DictConfig` object, "
-            f"but got {type(cfg).__name__}."
+            "Expect `cfg` to be a `DictConfig` object, " f"but got {type(cfg).__name__}."
         )
 
     for _, callback_cfg in cfg.items():
@@ -81,8 +80,7 @@ def build_loggers(cfg: Optional[DictConfig] = None) -> List[Logger]:
 
     if not isinstance(cfg, DictConfig):
         raise TypeError(
-            "Expect `cfg` to be a `DictConfig` object, "
-            f"but got {type(cfg).__name__}."
+            "Expect `cfg` to be a `DictConfig` object, " f"but got {type(cfg).__name__}."
         )
 
     for _, logger_cfg in cfg.items():

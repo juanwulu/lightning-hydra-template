@@ -33,10 +33,55 @@ sys.path.append(project_root)
 # Disable Tensorflow Warnings
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
+
 # Register custom resolvers for `OmegaConf`
+def join_string_underscore(texts: Iterable[str]) -> str:
+    """Join strings with underscore."""
+    return "_".join(str(item) for item in texts)
+
+
+def parse_git_sha(clean: bool = False) -> str:
+    """Parse git information and export to environment variables.
+
+    Args:
+        clean (bool, optional): If to check whether the git repository is
+            clean. Defaults to False.
+
+    Returns:
+        str: The short SHA of the current git repository.
+
+    Raises:
+        RuntimeError: If the repository is not clean and `clean
+    """
+    import git
+
+    repo = git.Repo(search_parent_directories=True)
+    sha = str(repo.head.object.hexsha)
+    short_sha = str(repo.git.rev_parse(sha, short=7))
+    is_clean = not repo.is_dirty()
+
+    if clean and not is_clean:
+        raise RuntimeError(
+            "Clean your git repository before running experiments! "
+            f"GIT SHA: {sha}, Status: {'Clean' if is_clean else 'Dirty'}"
+        )
+        os._exit(1)
+
+    os.environ["PROJECT_GIT_SHA"] = sha
+    os.environ["PROJECT_GIT_SHORT_SHA"] = short_sha
+
+    return short_sha
+
+
 OmegaConf.register_new_resolver(
     "join_string_underscore",
-    lambda texts: "_".join(texts) if isinstance(texts, Iterable) else texts,
+    join_string_underscore,
+    replace=False,
+    use_cache=False,
+)
+OmegaConf.register_new_resolver(
+    "parse_git_sha",
+    lambda clean: parse_git_sha(clean=clean),
     replace=False,
     use_cache=False,
 )
